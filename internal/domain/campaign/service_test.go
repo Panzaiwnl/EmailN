@@ -18,9 +18,9 @@ func (r *repositoryMock) Save(campaign *Campaign) error {
 	return args.Error(0)
 }
 
-func (r *repositoryMock) Get() []Campaign {
+func (r *repositoryMock) Get() ([]Campaign, error) {
 	//args := r.Called()
-	return nil
+	return nil, nil
 }
 
 var (

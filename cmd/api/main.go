@@ -22,9 +22,12 @@ func main() {
 	handler := endpoints.Handler{
 		CampaignService: campaignService,
 	}
-	r.Post("/campaigns", handler.CampaignsPost)
+	r.Post("/campaigns", endpoints.HandlerError(handler.CampaignsPost))
+	r.Get("/campaigns", endpoints.HandlerError(handler.CampaignsGet))
 
-	r.Get("/campaigns", handler.CampaignsGet)
+	r.Get("/", func(writer http.ResponseWriter, request *http.Request) {
+		writer.Write([]byte("Funcionando"))
+	})
 
 	http.ListenAndServe(":3000", r)
 }
